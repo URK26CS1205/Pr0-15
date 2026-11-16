@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark and Light Mode</title>
+
+    <style>
+        /* Light Theme */
+        .light-theme {
+            background-color: #f4f4f4;
+            color: #222;
+        }
+
+        /* Dark Theme */
+        .dark-theme {
+            background-color: #1e1e1e;
+            color: white;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+            min-height: 100vh;
+            box-sizing: border-box;
+            transition: background-color 0.4s, color 0.4s;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 12px;
+            background-color: rgba(128, 128, 128, 0.15);
+        }
+
+        button {
+            padding: 12px 22px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .light-btn {
+            background-color: #ffcc66;
+            color: #222;
+        }
+
+        .dark-btn {
+            background-color: #333;
+            color: white;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Theme Switcher</h1>
+
+        <p>Choose your preferred theme!</p>
+
+        <button class="light-btn" onclick="setTheme('light')">
+            Light Mode
+        </button>
+
+        <button class="dark-btn" onclick="setTheme('dark')">
+            Dark Mode
+        </button>
+
+        <h2 id="themeText">Current Theme: Light</h2>
+
+        <p>
+            This webpage changes its appearance based on
+            your selected theme.
+        </p>
+    </div>
+
+    <script>
+        // Apply the selected theme
+        function setTheme(theme) {
+
+            document.body.classList.remove(
+                "light-theme",
+                "dark-theme"
+            );
+
+            if (theme === "light") {
+                document.body.classList.add("light-theme");
+                document.getElementById("themeText").innerText =
+                    "Current Theme: Light";
+            }
+            else {
+                document.body.classList.add("dark-theme");
+                document.getElementById("themeText").innerText =
+                    "Current Theme: Dark";
+            }
+        }
+
+        // Detect the system's preferred theme
+        const systemPreference = window.matchMedia(
+            "(prefers-color-scheme: dark)"
+        );
+
+        // Use system preference as the initial theme
+        if (systemPreference.matches) {
+            setTheme("dark");
+        }
+        else {
+            setTheme("light");
+        }
+    </script>
+
+</body>
+</html>
